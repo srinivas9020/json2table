@@ -1,0 +1,33 @@
+<table>
+  <tr>
+    <td *ngFor="let item of keys">
+      <div>
+        {{item}}
+      </div>
+    </td>
+  </tr>
+  
+  <ng-container *ngIf="keys.length>0">
+  <tr *ngFor="let item of jsonArray">
+      <td *ngFor="let data of keys">
+        <div *ngIf="isString(item[data])">
+          {{item[data]}}
+        </div>
+        <div *ngIf="isObject(item[data])">
+          <app-object-component [jsonObject]="item[data]"></app-object-component>
+        </div>
+        <div *ngIf="isArray(item[data])">
+          <app-array [jsonArray]="item[data]"></app-array>
+        </div>
+      </td>
+    
+  </tr>
+</ng-container>
+<ng-container *ngIf="keys.length == 0">
+  <table>
+    <tr *ngFor= "let item of jsonArray">
+      <div>{{item}}</div>
+    </tr>
+  </table>
+</ng-container>
+</table>

@@ -1,0 +1,18 @@
+<table>
+  <tr *ngFor="let key of keys">
+    <td>
+      <div>{{key}}</div>
+    </td>
+    <td>
+      <div *ngIf="isString(jsonObject[key])">
+        {{jsonObject[key]}}
+      </div>
+      <div *ngIf="isObject(jsonObject[key])">
+        <app-object-component [jsonObject]="jsonObject[key]"></app-object-component>
+      </div>
+      <div *ngIf="isArray(jsonObject[key])">
+          <app-array [jsonArray]="jsonObject[key]"></app-array>
+      </div>
+    </td>
+  </tr>
+</table>

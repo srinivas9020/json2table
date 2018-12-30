@@ -1,0 +1,8 @@
+
+  <ng-container *ngIf="isArray(inputJson)">
+    <app-array [jsonArray]="inputJson"></app-array>
+  </ng-container>
+  
+  <ng-container *ngIf="isObject(inputJson)">
+    <app-object-component [jsonObject]="inputJson"></app-object-component>
+  </ng-container> 
