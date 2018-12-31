@@ -16,7 +16,7 @@ export class UtilityService {
   }
 
   isString(item) {
-    return typeof (item) === 'string';
+    return typeof (item) === 'string' || typeof(item) === 'number';
   }
 
   getKeysFromArray(sourceArray) {
