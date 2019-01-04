@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { sampleJson } from '../assets/jsonData';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +7,9 @@ import { sampleJson } from '../assets/jsonData';
 })
 export class AppComponent implements OnInit {
   title = 'dynamic-table';
-  public json:any;
   constructor(){
-
   }
 
   ngOnInit(){
-    this.json = sampleJson;
   }
 }

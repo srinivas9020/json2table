@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UtilityService } from '../utility.service';
 import * as _ from 'lodash';
 
@@ -9,11 +9,25 @@ import * as _ from 'lodash';
 })
 export class TableComponent implements OnInit {
 
-  @Input() inputJson;
+  public inputText:any;
+  public inputJson:any;
+  public jsonValid:boolean = true;
+
   constructor(private utilityService:UtilityService) { }
 
   ngOnInit() {
     
+  }
+
+  renderTable(){
+    try{
+      this.inputJson = JSON.parse(this.inputText);
+      this.jsonValid = true;
+    }
+    catch(err){
+      this.jsonValid = false;
+      alert(err.message);
+    }
   }
 
   isArray(item) {

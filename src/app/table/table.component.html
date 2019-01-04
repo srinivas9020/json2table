@@ -1,8 +1,9 @@
-
-  <ng-container *ngIf="isArray(inputJson)">
+  <textarea [(ngModel)] = "inputText" rows="10" cols="30"></textarea>
+  <button (click)="renderTable()">Submit</button>
+  <ng-container *ngIf="isArray(inputJson) && jsonValid">
     <app-array [jsonArray]="inputJson"></app-array>
   </ng-container>
   
-  <ng-container *ngIf="isObject(inputJson)">
+  <ng-container *ngIf="isObject(inputJson) && jsonValid">
     <app-object-component [jsonObject]="inputJson"></app-object-component>
   </ng-container> 
