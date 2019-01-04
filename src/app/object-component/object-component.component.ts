@@ -27,4 +27,10 @@ export class ObjectComponentComponent implements OnInit {
     return this.utilityService.isString(item);
   }
 
+  getColSpanCount(item){
+    if(this.isObject(item) || this.isArray(item)){
+      return 2;
+    }
+    return 0;
+  }
 }
