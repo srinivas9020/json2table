@@ -7,6 +7,7 @@ import { TableComponent } from './table/table.component';
 import { ArrayComponent } from './array/array.component';
 import { ObjectComponentComponent } from './object-component/object-component.component';
 import { UtilityService } from './utility.service';
+import { TilesComponent } from './tiles/tiles.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UtilityService } from './utility.service';
     AppComponent,
     TableComponent,
     ArrayComponent,
-    ObjectComponentComponent
+    ObjectComponentComponent,
+    TilesComponent
   ],
   imports: [
     BrowserModule,
