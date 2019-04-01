@@ -9011,6 +9011,66 @@ export class TilesComponent implements OnInit {
       }
     }
     this.tileList = this.convertedJson.rss.channel.item;
+    this.createDependecy();
+  }
+
+  createDependecy() {
+    for (let i = 0, len = this.tileList.length; i < len - 2; i++) {
+      for (let j = i+1; j < len - 1; j++) {
+        let previousTile = this.tileList[i];
+        let nextTile = this.tileList[j];
+        if (this.updateLinks(previousTile, nextTile)) {
+          previousTile.hasLinks = previousTile.hasLinks ? previousTile.hasLinks + ',' + nextTile.link : nextTile.link;
+          nextTile.hasLinks = nextTile.hasLinks ? nextTile.hasLinks + ',' + previousTile.link : previousTile.link;
+        }
+      }
+    }
+  }
+
+  updateLinks(firstTile, nextTile) {
+    let firstIssueLinks = firstTile.issuelinks.issuelinktype;
+    let secondIssueLinks = nextTile.issuelinks.issuelinktype;
+    let firstLinkIds = this.getLinkIds(firstIssueLinks);
+    let secondLinkIds = this.getLinkIds(secondIssueLinks);
+    return this.comareIds(firstLinkIds, secondLinkIds);
+  }
+
+  comareIds(firstLinkIds, secondLinkIds) {
+    for (let i = 0, len = firstLinkIds.length; i < len - 1; i++) {
+      if (secondLinkIds.indexOf(firstLinkIds[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getLinkIds(links) {
+    let linkIds = [];
+    for (let i = 0, len = links.length; i < len; i++) {
+      let outwardLinks = links[i].outwardlinks;
+      let inwardLinks = links[i].inwardlinks;
+      if (outwardLinks) {
+        if (Array.isArray(outwardLinks.issuelink)) {
+          linkIds =  linkIds.concat(outwardLinks.issuelink.map((item) => {
+            return item.issuekey._id;
+          }));
+        }
+        else {
+          linkIds = linkIds.concat([outwardLinks.issuelink.issuekey._id])
+        }
+      }
+      if (inwardLinks) {
+        if (Array.isArray(inwardLinks.issuelink)) {
+         linkIds =  linkIds.concat(inwardLinks.issuelink.map((item) => {
+            return item.issuekey._id;
+          }));
+        }
+        else {
+          linkIds = linkIds.concat([inwardLinks.issuelink.issuekey._id])
+        }
+      }
+    }
+    return linkIds;
   }
 
 }
